@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-dark-bg: #0F172A;
+  --color-dark-card: #1E293B;
+  --color-dark-border: #334155;
+  --color-dark-text: #F8FAFC;
+  --color-dark-muted: #94A3B8;
+
+  --color-light-bg: #F8FAFC;
+  --color-light-card: #FFFFFF;
+  --color-light-border: #E2E8F0;
+  --color-light-text: #0F172A;
+  --color-light-muted: #64748B;
+
+  --color-brand-primary: #6366F1;
+  --color-brand-secondary: #EC4899;
+  --color-brand-accent: #10B981;
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+}
+
+/* Base style overrides */
+html {
+  scroll-behavior: smooth;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+body {
+  @apply transition-colors duration-500 ease-in-out font-sans;
+}
+
+/* Smooth dark mode transitions for common elements */
+header, nav, main, section, article, aside, footer,
+div[class*="bg-"], div[class*="border-"],
+p, span, a, h1, h2, h3, h4, h5, h6,
+li, td, th, blockquote, pre, code,
+button, input, textarea, select {
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light-bg dark:bg-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
+}
+
+/* Glassmorphism utility class */
+.glass-effect {
+  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 shadow-lg;
+}
+
+.glass-effect-hover {
+  @apply hover:bg-white/80 dark:hover:bg-slate-900/80 transition-all duration-300;
+}
+
+/* Text clipping gradient */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-purple-500 to-brand-secondary;
+}
+
+/* Text outline effect for SHIAM in the background */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #64748B;
+}
+
+.dark .text-outline {
+  -webkit-text-stroke-color: #475569;
+}
+
+/* Animated radial grid background for premium feeling */
+.grid-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Dark mode animated ambient gradient */
+@keyframes dark-ambient-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-2%, -1%) scale(1.02);
+  }
+  50% {
+    transform: translate(1%, -2%) scale(1.01);
+  }
+  75% {
+    transform: translate(-1%, 1%) scale(1.02);
+  }
+}
+
+.dark-ambient-gradient {
+  animation: dark-ambient-drift 35s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Dark mode subtle card glow */
+.dark-card-glow {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 4px 20px -2px rgba(0, 0, 0, 0.3), 0 0 40px -10px rgba(99, 102, 241, 0.08);
+}
+
+.dark-card-glow-hover:hover {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 30px -4px rgba(0, 0, 0, 0.4), 0 0 60px -10px rgba(99, 102, 241, 0.12);
+}
+
+/* Global text selection */
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #ffffff;
+}
+
+/* Career Goals card hover */
+.goal-card {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.goal-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.dark .goal-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 8px 30px -4px rgba(0, 0, 0, 0.4), 0 0 40px -10px rgba(99, 102, 241, 0.15);
+}
+
+/* Hero animated gradient blobs */
+@keyframes heroBlobFloat {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10%, -5%);
+  }
+  50% {
+    transform: translate(-5%, 4%);
+  }
+  75% {
+    transform: translate(5%, -2%);
+  }
+}
+
+.hero-gradient-blob {
+  animation: heroBlobFloat 25s ease-in-out infinite;
+}
+
+/* Hero noise texture */
+.hero-noise-texture {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+}
+
+.dark .hero-noise-texture {
+  opacity: 0.03;
+}
+
+/* Hero animated gradient drift */
+@keyframes heroGradientDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, -2%) scale(1.05);
+  }
+  66% {
+    transform: translate(-2%, 1%) scale(1.03);
+  }
+}
+
+.hero-gradient-drift {
+  animation: heroGradientDrift 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Concentric ring animations */
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.06);
+  }
+}
+
+.hero-ring {
+  animation: ringPulse 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.hero-ring-dark {
+  animation: ringPulse 10s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Floating particles */
+.hero-particle {
+  animation: particleFloat var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: var(--base-opacity);
+  }
+  50% {
+    transform: translateY(-20px) translateX(8px);
+    opacity: calc(var(--base-opacity) * 0.3);
+  }
+}
+
+/* Hero cutout image — clean shadow, no mask, no halo */
+.hero-cutout {
+  filter: drop-shadow(0 25px 50px rgba(99, 102, 241, 0.18))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+.dark .hero-cutout {
+  filter: drop-shadow(0 25px 60px rgba(99, 102, 241, 0.35))
+          drop-shadow(0 10px 25px rgba(0, 0, 0, 0.55));
+}
