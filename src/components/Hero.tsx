@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[100vh] flex items-center pt-28 pb-6 lg:pt-36 lg:pb-10 overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-500"
+      className="relative min-h-screen flex items-center pt-28 pb-16 lg:pt-36 lg:pb-10 overflow-hidden bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-500"
     >
       {/* ─── BACKGROUND LAYERS ─────────────────────────────────────── */}
 
@@ -131,10 +131,11 @@ const Hero: React.FC = () => {
 
       {/* ─── MAIN CONTENT ─────────────────────────────────────────── */}
 
-      {/* Grid: text content only */}
+      {/* Main content */}
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4">
-          <div className="lg:col-span-5 flex flex-col justify-center text-left space-y-5 lg:space-y-6 xl:pr-8">
+        <div className="grid grid-cols-1 min-[938px]:grid-cols-12 min-[938px]:gap-8">
+          {/* Text column */}
+          <div className="flex flex-col text-left space-y-5 lg:space-y-6 xl:pr-8 max-w-2xl min-[938px]:max-w-none min-[938px]:col-span-5 min-[938px]:self-center mx-auto min-[938px]:mx-0">
             {/* Small badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -200,27 +201,27 @@ const Hero: React.FC = () => {
               </a>
             </motion.div>
           </div>
+
+          {/* Portrait — visible only on ≥ 938px, vertically aligned with the text column */}
+          <div className="hidden min-[938px]:block min-[938px]:col-span-7 min-[938px]:justify-self-end min-[938px]:self-end relative pointer-events-none">
+            {/* Ambient glow */}
+            <div className="absolute -inset-16 lg:-inset-24 bg-gradient-to-tr from-brand-primary/20 via-purple-500/15 to-cyan-400/10 dark:from-brand-primary/30 dark:via-purple-500/20 dark:to-cyan-500/10 rounded-full blur-[140px] opacity-70 dark:opacity-80 pointer-events-none" />
+
+            {/* Portrait image */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
+            >
+              <img
+                src={heroImg}
+                alt="Shiam — Frontend Developer"
+                className="hero-cutout w-[180px] sm:w-[220px] md:w-[365px] lg:w-[400px] xl:w-[440px] h-auto object-bottom select-none"
+                onError={() => setHeroImg(shiamHeroFallback)}
+              />
+            </motion.div>
+          </div>
         </div>
-      </div>
-
-      {/* Portrait — independent of grid, positioned relative to Hero section */}
-      <div className="absolute bottom-0 right-4 lg:right-16 pointer-events-none">
-        {/* Ambient glow */}
-        <div className="absolute -inset-16 lg:-inset-24 bg-gradient-to-tr from-brand-primary/20 via-purple-500/15 to-cyan-400/10 dark:from-brand-primary/30 dark:via-purple-500/20 dark:to-cyan-500/10 rounded-full blur-[140px] opacity-70 dark:opacity-80 pointer-events-none" />
-
-        {/* Portrait image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.25 }}
-        >
-          <img
-            src={heroImg}
-            alt="Shiam — Frontend Developer"
-            className="hero-cutout w-[180px] sm:w-[220px] md:w-[260px] lg:w-[365px] xl:w-[405px] h-auto object-bottom select-none"
-            onError={() => setHeroImg(shiamHeroFallback)}
-          />
-        </motion.div>
       </div>
     </section>
   );
